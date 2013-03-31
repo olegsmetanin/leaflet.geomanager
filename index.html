@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Leaflet Geo Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+
+    <link href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" rel="stylesheet" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
+    <![endif]-->
+
+
+    <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+
+    <link href="http://leaflet.github.com/Leaflet.label/leaflet.label.css" rel="stylesheet" />
+
+    <link href="components/jquery.select2/select2.css" rel="stylesheet" />
+    <link href="components/jquery.select2/select2-bootstrap.css" rel="stylesheet" />
+
+    <link href="components/bootstrap.dropdownform/bootstrap.dropdownform.css" rel="stylesheet" />
+    <link href="components/leaflet.geomanager/leaflet.geomanager.css" rel="stylesheet" />
+
+    <style type="text/css">
+
+/* Jumbotrons
+-------------------------------------------------- */
+
+/* Base class
+------------------------- */
+#overview {
+  background-color: #40454F;
+
+    color: #FFF;
+  text-decoration: none;
+  border-bottom: 2px solid #FFF;
+}
+
+#overview .lead {
+  color: #9EA1A6;
+}
+
+section {
+  padding-top: 30px;
+}
+
+
+/* Sidenav for Docs
+-------------------------------------------------- */
+
+.bs-docs-sidenav {
+  width: 228px;
+  margin: 30px 0 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.bs-docs-sidenav > li > a {
+  display: block;
+  width: 190px \9;
+  margin: 0 0 -1px;
+  padding: 8px 14px;
+  border: 1px solid #e5e5e5;
+}
+.bs-docs-sidenav > li:first-child > a {
+  -webkit-border-radius: 6px 6px 0 0;
+     -moz-border-radius: 6px 6px 0 0;
+          border-radius: 6px 6px 0 0;
+}
+.bs-docs-sidenav > li:last-child > a {
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+}
+.bs-docs-sidenav > .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 9px 15px;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+/* Chevrons */
+.bs-docs-sidenav .icon-chevron-right {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  opacity: .25;
+}
+.bs-docs-sidenav > li > a:hover {
+  background-color: #f5f5f5;
+}
+.bs-docs-sidenav a:hover .icon-chevron-right {
+  opacity: .5;
+}
+.bs-docs-sidenav .active .icon-chevron-right,
+.bs-docs-sidenav .active a:hover .icon-chevron-right {
+  background-image: url(../img/glyphicons-halflings-white.png);
+  opacity: 1;
+}
+.bs-docs-sidenav.affix {
+  top: 0px;
+}
+.bs-docs-sidenav.affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 270px;
+}
+
+
+.footer {
+    background-color: #F5F5F5;
+    border-top: 1px solid #E5E5E5;
+    margin-top: 70px;
+    padding: 30px 0;
+    text-align: center;
+}
+
+
+
+pre.prettyprint {
+    display: block;
+    width: auto;
+    overflow: auto;
+    white-space: pre;
+    word-wrap: normal;
+    padding: 10px;
+  }
+
+.select2-results {
+    max-height: 400px;
+}
+
+
+    </style>
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.png">
+  </head>
+
+  <body data-target=".bs-docs-sidebar" data-spy="scroll">
+
+    <header class="jumbotron" id="overview">
+      <div class="container">
+        <h3>Leaflet Geo Manager</h3>
+        <p class="lead">Manage layers, identifiers and geocoders</p>
+      </div>
+    </header>
+
+
+    <div class="container">
+
+      <div class="row">
+        <div  class="span3 bs-docs-sidebar">
+          <ul id="navbar" class="nav nav-list bs-docs-sidenav affix-top">
+            <li><a href="#example"><i class="icon-chevron-right"></i> Example</a></li>
+            <li><a href="#description"><i class="icon-chevron-right"></i> Description</a></li>
+            <li><a href="#usage"><i class="icon-chevron-right"></i> Usage</a></li>
+            <li><a href="#options"><i class="icon-chevron-right"></i> Options</a></li>
+            <li><a href="#methods"><i class="icon-chevron-right"></i> Methods</a></li>
+            <li><a href="#source"><i class="icon-chevron-right"></i> Source code</a></li>
+          </ul>
+        </div>
+
+        <div class="span9">
+
+          <section id="example">
+            <div class="page-header">
+              <h1>Example</h1>
+            </div>
+
+            <div class="control-group">
+              <div class="controls controls-row">
+
+
+                <div class="btn-group" style="margin-bottom: 10px;">
+                  <button id="layerdropdown" data-toggle="dropdownform" class="btn dropdownform-toggle">
+                      <i class="icon-align-justify"></i>
+                      <span class="caret">
+                      </span>
+                  </button>
+                  <ul class="dropdown-form" style="width:800px;">
+                    <li>
+                      <form style="margin:15px;">
+                        <div class="row" style="margin-top:10px;">
+                          <div class="span4">
+                            <div class="control-group">
+                              <label class="control-label">Base Layer</label>
+                              <div class="controls">
+                                <select id="baselayer" class="select2" style="width:350px;">
+                                  <option value="osm">OpenStreetMap Default</option>
+
+                                  <option value="google">Google</option>
+                                  <option value="google-satellite">Google Satellite</option>
+                                  <option value="google-hybrid">Google Hybrid</option>
+                                  <option value="google-terrain">Google Terrain</option>
+
+                                  <option value="bing">Bing</option>
+                                  <option value="bing-aerial">Bing Aerial</option>
+                                  <option value="bing-hybrid">Bing Hybrid</option>
+
+                                  <option value="osmbw">OpenStreetMap Black and White</option>
+                                  <option value="opencyclemap">OpenCycleMap default</option>
+                                  <option value="opencyclemap-transport">OpenCycleMap Transport</option>
+                                  <option value="opencyclemap-landscape">OpenCycleMap Landscape</option>
+                                  <option value="mapquest">MapQuest</option>
+                                  <option value="mapquest-aerial">MapQuest Aerial</option>
+                                  <option value="stamen-toner">Stamen Toner</option>
+                                  <option value="stamen-terrain">Stamen Terrain</option>
+                                  <option value="stamen-watercolor">Stamen Watercolor</option>
+                                  <option value="esri">ESRI</option>
+                                  <option value="esri-topo">ESRI WorldTopoMap</option>
+                                  <option value="esri-imagery">ESRI WorldImagery</option>
+
+                                  <option value="yandex">Yandex</option>
+                                  <option value="yandex-satellite">Yandex Satellite</option>
+                                  <option value="yandex-hybrid">Yandex Hybrid</option>
+                                  <option value="yandex-publicmap">Yandex Public Map</option>
+                                  <option value="yandex-publicmap-hybrid">Yandex Public Hybrid</option>
+                                  <option value="wikimapia">Wikimapia OSM</option>
+                                  <option value="none">None</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="span4">
+                            <div class="control-group">
+                              <label class="control-label">Overlay</label>
+                              <div class="controls">
+                                <select id="overlay" class="select2" style="width:350px;">
+                                  <option value="none">None</option>
+                                  <option value="wikimapia-hybrid">Wikimapia Hybrid</option>
+                                  <option value="rucadastre">Russian cadastre</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="input-prepend">
+
+                  <button class="btn" type="button" data-select2-open="interactivelayer">
+                    <i class="icon-info-sign"></i>
+                  </button>
+
+                  <select id="interactivelayer" class="select2" style="width:150px;">
+                    <option value="none">None</option>
+                    <option value="wikimapia-api">Wikimapia API</option>
+                    <option value="osm-identify">OSM Identify</option>
+                    <option value="google-identify">Google Identify</option>
+                    <option value="bing-identify">Bing Identify</option>
+                    <option value="rucadastre-identify">Russian cadastre</option>
+                  </select>
+
+
+                </div>
+
+                <div class="input-prepend">
+
+                  <button id="geocodebutton" class="btn" type="button">
+                    <i class="icon-search"></i>
+                  </button>
+
+                  <input id="geocodeinput" type="text" placeholder="Search...">
+
+                </div>
+
+                <div class="input-prepend">
+
+                  <button class="btn" type="button" data-select2-open="geocoder">
+                    <i class="icon-globe"></i>
+                  </button>
+
+                  <select id="geocoder" class="select2" style="width:200px;">
+                    <option value="osm-geocode">OpenStreetMap</option>
+                    <option value="google-geocode">Google</option>
+                    <option value="bing-geocode">Bing</option>
+                    <option value="esri-geocode">ESRI</option>
+                    <option value="geonames-geocode">Geonames</option>
+                    <option value="mapquest-geocode">MapQuest</option>
+                    <option value="nokia-geocode">Nokia</option>
+                    <option value="yandex-geocode">Yandex</option>
+                    <option value="rucadastre-geocode">RuCadastre (parcel numbers)</option>
+                  </select>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div id="map" style="width:100%; height:600px; "></div>
+
+          </section>
+
+          <section id="description">
+            <div class="page-header">
+              <h1>Description</h1>
+            </div>
+            <p>Manage baselayers:</p>
+            <ul>
+              <li>OpenStreetMap Default</li>
+
+              <li>Google</li>
+              <li>Google Satellite</li>
+              <li>Google Hybrid</li>
+              <li>Google Terrain</li>
+
+              <li>Bing</li>
+              <li>Bing Aerial</li>
+              <li>Bing Hybrid</li>
+
+              <li>OpenStreetMap Black and White</li>
+              <li>OpenCycleMap default</li>
+              <li>OpenCycleMap Transport</li>
+              <li>OpenCycleMap Landscape</li>
+              <li>MapQuest</li>
+              <li>MapQuest Aerial</li>
+              <li>Stamen Toner</li>
+              <li>Stamen Terrain</li>
+              <li>Stamen Watercolor</li>
+              <li>ESRI</li>
+              <li>ESRI WorldTopoMap</li>
+              <li>ESRI WorldImagery</li>
+
+              <li>Yandex</li>
+              <li>Yandex Satellite</li>
+              <li>Yandex Hybrid</li>
+              <li>Yandex Public Map</li>
+              <li>Yandex Public Hybrid</li>
+              <li>Wikimapia OSM</li>
+            </ul>
+          <p>Manage overlays:</p>
+            <ul>
+              <li>Wikimapia Hybrid</li>
+              <li>Russian cadastre</li>
+            </ul>
+          <p>Manage interactive layers and identifiers:</p>
+            <ul>
+              <li>Wikimapia API</li>
+              <li>OSM Identify</li>
+              <li>Google Identify</li>
+              <li>Bing Identify</li>
+              <li>Russian cadastre</li>
+            </ul>
+          <p>Manage geocoders:</p>
+            <ul>
+              <li>OpenStreetMap</li>
+              <li>Google</li>
+              <li>Bing</li>
+              <li>ESRI</li>
+              <li>Geonames</li>
+              <li>MapQuest</li>
+              <li>Nokia</li>
+              <li>Yandex</li>
+              <li>RuCadastre (parcel numbers)</li>
+            </ul>
+
+          </section>
+
+          <section id="usage">
+            <div class="page-header">
+              <h1>Usage</h1>
+            </div>
+
+
+            <h3>Add script</h3>
+<pre class="prettyprint linenums">
+// GEO Ip Locator Script
+&lt;script src=&quot;http://j.maxmind.com/app/geoip.js&quot;&gt;&lt;/script&gt;
+// Date.format using by some identifiers
+&lt;script src=&quot;components/date.format/date.format.js&quot;&gt;&lt;/script&gt;
+// jQuery
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+// Select2
+&lt;script src=&quot;components/jquery.select2/select2.js&quot;&gt;&lt;/script&gt;
+// Leaflet
+&lt;script src=&quot;http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js&quot;&gt;&lt;/script&gt;
+// Leaflet.label
+&lt;script src=&quot;components/leaflet.label/leaflet.label-src.js&quot;&gt;&lt;/script&gt;
+// Leaflet.GeoManager
+&lt;script src=&quot;components/leaflet.geomanager/layers/google.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;components/leaflet.geomanager/layers/bing.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;components/leaflet.geomanager/layers/wikimapia.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;components/leaflet.geomanager/leaflet.geomanager.js&quot;&gt;&lt;/script&gt;
+// Optional Yandex providers
+&lt;script src=&quot;components/leaflet.geomanager/layers/yandex.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;components/leaflet.geomanager/providers/yandex.js&quot;&gt;&lt;/script&gt;
+// Optional Cadastre providers
+&lt;script src=&quot;components/leaflet.geomanager/layers/rucadastre.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;components/leaflet.geomanager/providers/cadastre.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  var map = L.map('map').setView([geoip_latitude(),  geoip_longitude()], 13);
+
+  L.control.scale().addTo(map);
+
+  var geoManager = new L.GeoManager({
+    apikeys: {
+      'bing': ''
+      , 'mapquest': ''
+      , 'wikimapia': ''
+      , 'nokia': ''
+    }
+  });
+
+  geoManager.addTo(map);
+
+  // Change baselayer
+  $('#google').on('click', function (e) {
+    geoManager.setOptions({baselayer: 'google'});
+  })
+  // Change overlay
+  $('#overlay').on('click', function (e) {
+    geoManager.setOptions({overlay: 'wikimapia-hybrid'});
+  })
+  // Change interactive layer
+  $('#interactivelayer').on('click', function (e) {
+    geoManager.setOptions({interactivelayer: 'wikimapia-api'});
+  })
+  // Geocode on click or keydown
+  $('#geocodebutton').on('click', function(e) {
+      geoManager.geocode( $('#geocodeinput').val())
+  });
+
+  $('#geocodeinput').on('keydown', function(e) {
+    if (e.keyCode == 13 ) {
+      e.preventDefault();
+      geoManager.geocode( $('#geocodeinput').val())
+    }
+  });
+
+
+&lt;/script&gt;
+</pre>
+
+          </section>
+
+
+
+
+          <section id="options">
+            <div class="page-header">
+              <h1>Options</h1>
+            </div>
+
+            <table class="table table-bordered table-striped">
+            <thead>
+             <tr>
+               <th style="width: 100px;">Name</th>
+               <th style="width: 150px;">type</th>
+               <th>description</th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr>
+               <td>apikey</td>
+               <td>object</td>
+               <td>Hash with apikeys {'bing':'', ...}</td>
+             </tr>
+             <tr>
+               <td>providers</td>
+               <td>object</td>
+               <td>Hash with named providers and functions {provider_name: function () {}, ...}</td>
+             </tr>
+             <tr>
+               <td>baselayer</td>
+               <td>string</td>
+               <td>Name of current baselayer provider</td>
+             </tr>
+             <tr>
+               <td>overlay</td>
+               <td>string</td>
+               <td>Name of current overlay provider</td>
+             </tr>
+             <tr>
+               <td>interactivelayer</td>
+               <td>string</td>
+               <td>Name of current interactive layer provider</td>
+             </tr>
+             <tr>
+               <td>geocoder</td>
+               <td>string</td>
+               <td>Name of current geocoder</td>
+             </tr>
+            </tbody>
+          </table>
+
+          </section>
+
+
+          <section id="methods">
+            <div class="page-header">
+              <h1>Methods</h1>
+            </div>
+
+            <table class="table table-bordered table-striped">
+            <thead>
+             <tr>
+               <th style="width: 100px;">Name</th>
+               <th style="width: 150px;">argument type</th>
+               <th>description</th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr>
+               <td>geocode</td>
+               <td>string</td>
+               <td>Geocode</td>
+             </tr>
+            </tbody>
+          </table>
+
+          </section>
+
+          <section id="source">
+            <div class="page-header">
+              <h1>Source code</h1>
+            </div>
+            <div class="jumbotron">
+              <a class="btn btn-large btn-success" href="https://github.com/olegsmith/leaflet.geomanager">View on GitHub</a>
+              <a class="btn btn-large btn-success" href="https://github.com/olegsmith/leaflet.geomanager/zipball/master">.zip file</a>
+            </div>
+
+          </section>
+
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+      <div class="footer">
+        <div class="container">
+          <p class="copyright">
+            Leaflet.GeoManager maintained by <a href="https://github.com/olegsmith">olegsmith</a>
+          </p>
+        </div>
+      </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- GEO Ip Locator Script -->
+    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script>
+
+    <!-- Date.format -->
+    <script src="http://stevenlevithan.com/assets/misc/date.format.js"></script>
+
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="components/jquery.select2/select2.js"></script>
+
+
+    <!-- Bootstrap -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="components/bootstrap.dropdownform/bootstrap.dropdownform.js"></script>
+
+
+    <!-- Leaflet -->
+    <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+<!--     <script src="components/leaflet/leaflet-src.js"></script> -->
+
+    <script src="components/leaflet.label/leaflet.label-src.js"></script>
+
+    <script src="components/leaflet.geomanager/layers/wikimapia.js"></script>
+    <script src="components/leaflet.geomanager/layers/yandex.js"></script>
+    <script src="components/leaflet.geomanager/layers/google.js"></script>
+    <script src="components/leaflet.geomanager/layers/bing.js"></script>
+    <script src="components/leaflet.geomanager/layers/rucadastre.js"></script>
+
+    <script src="components/leaflet.geomanager/leaflet.geomanager.js"></script>
+    <script src="components/leaflet.geomanager/providers/yandex.js"></script>
+    <script src="components/leaflet.geomanager/providers/cadastre.js"></script>
+
+
+
+    <!-- Google prettify -->
+    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+
+
+
+    <script>
+
+      function format(option) {
+          if (!option.id) return option.text; // optgroup
+
+          return ''
+            + '<table><tbody><tr><td>'
+            + '<p class="thumbnail" style="margin: 4px 0 0 0;"><img src="components/leaflet.geomanager/img/1x1.png" class="layer-thumbnail layer-thumb-'+option.id+'"></img></p>'
+            + '</td><td style="width:80px; white-space: normal;"><p style="margin:4px 0 0 4px;  line-height: 20px;">' + option.text+'</p>'
+            + '</td></tr></tbody></table>'
+      }
+
+
+      $('.select2').select2();
+      $('button[data-select2-open]').click(function(){
+        $('#' + $(this).data('select2-open')).select2('open');
+      });
+
+      $('#baselayer').select2({
+          formatResult: format,
+          formatSelection: format,
+          escapeMarkup: function(m) { return m; }
+      });
+
+      $('#overlay').select2({
+          formatResult: format,
+          formatSelection: format,
+          escapeMarkup: function(m) { return m; }
+      });
+
+      $('#baselayer').on('change', function (e) {
+        geoManager.setOptions({baselayer: e.val});
+      })
+
+      $('#overlay').on('change', function (e) {
+        geoManager.setOptions({overlay: e.val});
+      })
+
+      $('#interactivelayer').on('change', function (e) {
+        geoManager.setOptions({interactivelayer: e.val});
+      })
+
+      $('#geocoder').on('change', function (e) {
+          geoManager.setOptions({geocoder:e.val})
+      })
+
+      $('#geocodebutton').on('click', function(e) {
+          geoManager.geocode( $('#geocodeinput').val())
+      });
+
+      $('#geocodeinput').on('keydown', function(e) {
+        if (e.keyCode == 13 ) {
+          e.preventDefault();
+          geoManager.geocode( $('#geocodeinput').val())
+        }
+      });
+
+
+      var map = L.map('map').setView([geoip_latitude(),  geoip_longitude()], 13);
+
+      L.control.scale().addTo(map);
+
+      var geoManager = new L.GeoManager({
+        apikeys: {
+          'bing': 'Anqm0F_JjIZvT0P3abS6KONpaBaKuTnITRrnYuiJCE0WOhH6ZbE4DzeT6brvKVR5'
+          , 'mapquest': 'Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq'
+          , 'wikimapia': '60175C48-4B0C86C-A2D4D106-A5F37CAF-5A760C96-45526DF2-6D90C63B-511E68EE'
+          , 'nokia': 'HGHGJHgdbndbmbsdf7675wefdvvdsnb'
+        }
+      });
+
+      geoManager.addTo(map);
+
+      // setActiveTab call from dynamic bootstrap tabs in identifier window
+      function setActiveTab(e) {
+        e.preventDefault();
+        $(e.target).tab('show');
+      }
+
+      // make code pretty
+      window.prettyPrint && prettyPrint()
+
+    </script>
+
+    <script>
+      $('#navbar').affix({offset:110});
+    </script>
+
+</body></html>

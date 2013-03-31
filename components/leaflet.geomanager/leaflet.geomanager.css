@@ -1,0 +1,151 @@
+#s2id_baselayer .select2-choice, #s2id_overlay .select2-choice {
+  min-height: 80px;
+  max-height: 80px;
+}
+
+.layer-thumbnail {
+width:160px;
+height: 60px;
+}
+
+.layer-thumb-none {
+	background-image:url(img/1x1.png);
+}
+
+.layer-thumb-osm {
+	background-image:url(img/osm.png);
+}
+
+.layer-thumb-osmbw {
+	background-image:url(img/osmbw.png);
+}
+
+.layer-thumb-opencyclemap {
+	background-image:url(img/opencyclemap.png);
+}
+
+.layer-thumb-opencyclemap-transport {
+	background-image:url(img/opencyclemap-transport.png);
+}
+
+.layer-thumb-opencyclemap-landscape {
+	background-image:url(img/opencyclemap-landscape.png);
+}
+
+.layer-thumb-mapquest {
+	background-image:url(img/mapquest.png);
+}
+
+.layer-thumb-mapquest-aerial {
+	background-image:url(img/mapquest-aerial.png);
+}
+
+.layer-thumb-stamen-toner {
+	background-image:url(img/stamen-toner.png);
+}
+
+.layer-thumb-stamen-terrain {
+	background-image:url(img/stamen-terrain.png);
+}
+
+.layer-thumb-stamen-watercolor {
+	background-image:url(img/stamen-watercolor.png);
+}
+
+.layer-thumb-esri {
+	background-image:url(img/esri.png);
+}
+
+.layer-thumb-esri-topo {
+	background-image:url(img/esri-topo.png);
+}
+
+.layer-thumb-esri-imagery {
+	background-image:url(img/esri-imagery.png);
+}
+
+.layer-thumb-google {
+	background-image:url(img/google.png);
+}
+
+.layer-thumb-google-satellite {
+	background-image:url(img/google-satellite.png);
+}
+
+.layer-thumb-google-satellite {
+	background-image:url(img/google-satellite.png);
+}
+
+.layer-thumb-google-hybrid {
+	background-image:url(img/google-hybrid.png);
+}
+
+.layer-thumb-google-terrain {
+	background-image:url(img/google-terrain.png);
+}
+
+.layer-thumb-bing {
+	background-image:url(img/bing.png);
+}
+
+.layer-thumb-bing-aerial {
+	background-image:url(img/bing-aerial.png);
+}
+
+.layer-thumb-bing-hybrid {
+	background-image:url(img/bing-hybrid.png);
+}
+
+.layer-thumb-yandex {
+	background-image:url(img/yandex.png);
+}
+
+.layer-thumb-yandex-satellite {
+	background-image:url(img/yandex-satellite.png);
+}
+
+.layer-thumb-yandex-hybrid {
+	background-image:url(img/yandex-hybrid.png);
+}
+
+.layer-thumb-yandex-publicmap {
+	background-image:url(img/yandex-publicmap.png);
+}
+
+.layer-thumb-yandex-publicmap-hybrid {
+	background-image:url(img/yandex-publicmap-hybrid.png);
+}
+
+.layer-thumb-wikimapia {
+	background-image:url(img/wikimapia.png);
+}
+
+.layer-thumb-rucadastre {
+	background-image:url(img/rucadastre.png);
+}
+
+.layer-thumb-wikimapia-hybrid {
+	background-image:url(img/wikimapia-hybrid.png);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
