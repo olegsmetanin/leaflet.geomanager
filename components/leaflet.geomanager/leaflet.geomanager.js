@@ -43,7 +43,7 @@ L.GeoManager = L.Class.extend({
             , 'osmbw' : this._osmbw
             , 'opencyclemap': this._opencyclemap
             , 'opencyclemap-transport': this._opencyclemapTransport
-            , 'opencyclemap-landscape': this._opencyclemapTandscape
+            , 'opencyclemap-landscape': this._opencyclemapLandscape
             , 'mapquest': this._mapquest
             , 'mapquest-aerial': this._mapquestAerial
             , 'stamen-toner': this._stamenToner
