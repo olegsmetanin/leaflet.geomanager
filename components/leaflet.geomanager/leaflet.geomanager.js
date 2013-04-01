@@ -30,7 +30,7 @@ L.GeoManager = L.Class.extend({
         }
     }
 
-    , initialize: function (options) {
+    , initialize: function (in_options) {
 
         var providers= {
             'none': this._none
@@ -77,7 +77,8 @@ L.GeoManager = L.Class.extend({
             , 'nokia-geocode' : this._nokiaGeocode
         }
 
-        options.providers = L.extend(options.providers, providers);
+        var options = L.extend({}, in_options);
+        options.providers = L.extend(options.providers ? options.providers : {}, providers);
 
         this.setOptions(options);
 
@@ -102,7 +103,7 @@ L.GeoManager = L.Class.extend({
         var that = this;
 
         if (that._map) {
-            if (that.options.baselayer ) {
+            if (that.options.baselayer) {
                 that.setLayer(that.options.baselayer, 'baselayer')
             }
 

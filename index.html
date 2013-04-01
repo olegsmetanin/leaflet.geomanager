@@ -689,9 +689,6 @@ pre.prettyprint {
           , 'wikimapia': '60175C48-4B0C86C-A2D4D106-A5F37CAF-5A760C96-45526DF2-6D90C63B-511E68EE'
           , 'nokia': 'HGHGJHgdbndbmbsdf7675wefdvvdsnb'
         }
-        , providers: {
-          'custom': customProvider
-        }
       }
 
       var geoManager = new L.GeoManager(geoOptions);
@@ -701,6 +698,8 @@ pre.prettyprint {
           'custom': customProvider
         }
       });
+
+      geoManager.addTo(map);
 
       // setActiveTab call from dynamic bootstrap tabs in identifier window
       function setActiveTab(e) {
