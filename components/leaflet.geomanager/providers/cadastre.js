@@ -2,6 +2,11 @@
 //http://wmts1.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/20120809/21781/14/0/0.jpeg
 //http://api.geo.admin.ch/main/wsgi/doc/build/services/sdiservices.html#wmts
 //http://api.geo.admin.ch/main/wsgi/doc/build/widgets/sdiwidgetsexamples1.html#map-with-gray-pixelmap-and-overlay-layer
+//http://www.geo.lu.ch/map/grundbuchplan/
+//http://geogr.mapserver.ch/shop/
+//http://geogr.mapserver.ch/shop/?q=de/prod_av
+//http://inspire-geoportal.ec.europa.eu/discovery/
+//http://wiki.openstreetmap.org/wiki/Cat2Osm2
 
 
 

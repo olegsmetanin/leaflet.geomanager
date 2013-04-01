@@ -31,9 +31,6 @@ L.GeoManager = L.Class.extend({
     }
 
     , initialize: function (options) {
-        if (options) {
-            L.setOptions(this, options);
-        }
 
         var providers= {
             'none': this._none
@@ -79,14 +76,18 @@ L.GeoManager = L.Class.extend({
             , 'mapquest-geocode' : this._mapquestGeocode
             , 'nokia-geocode' : this._nokiaGeocode
         }
-        this.options.providers = L.extend({}, providers, this.options.providers);
+
+        options.providers = L.extend(options.providers, providers);
+
+        this.setOptions(options);
+
     }
 
     , onAdd: function (map) {
         var that = this;
         that._map = map;
 
-        that.setOptions(that.options);
+        that._initLayers();
     }
 
     , onRemove: function (map) {
@@ -97,26 +98,43 @@ L.GeoManager = L.Class.extend({
         return this;
     }
 
-    , setOptions:function (options) {
-        var that = this
-        , providers = this.options.providers;
-
-        L.setOptions(this, options);
-        this.options.providers = L.extend({}, providers, this.options.providers);
+    , _initLayers: function() {
+        var that = this;
 
         if (that._map) {
-            if (options.baselayer ) {
-                that.setLayer(options.baselayer, 'baselayer')
+            if (that.options.baselayer ) {
+                that.setLayer(that.options.baselayer, 'baselayer')
             }
 
-            if (options.overlay) {
-                that.setLayer(options.overlay, 'overlay')
+            if (that.options.overlay) {
+                that.setLayer(that.options.overlay, 'overlay')
             }
 
-            if (options.interactivelayer) {
-                that.setLayer(options.interactivelayer, 'interactivelayer')
+            if (that.options.interactivelayer) {
+                that.setLayer(that.options.interactivelayer, 'interactivelayer')
             }
         }
+    }
+
+    , setOptions:function (options) {
+        var that = this;
+
+        if (options) {
+            if (options.providers) {
+                this.options.providers = L.extend(this.options.providers, options.providers);
+                delete options.providers;
+            }
+            if (options.apikeys) {
+                this.options.apikeys = L.extend(this.options.apikeys, options.apikeys);
+                delete options.apikeys;
+            }
+
+            L.setOptions(this, options);
+
+            that._initLayers();
+
+        }
+
         return this;
     }
 

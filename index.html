@@ -671,6 +671,17 @@ pre.prettyprint {
 
       L.control.scale().addTo(map);
 
+      var customProvider = function(arg) {
+        arg.cb(
+          new L.TileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            , {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+            }
+          )
+        )
+      }
+
       var geoManager = new L.GeoManager({
         apikeys: {
           'bing': 'Anqm0F_JjIZvT0P3abS6KONpaBaKuTnITRrnYuiJCE0WOhH6ZbE4DzeT6brvKVR5'
@@ -678,7 +689,17 @@ pre.prettyprint {
           , 'wikimapia': '60175C48-4B0C86C-A2D4D106-A5F37CAF-5A760C96-45526DF2-6D90C63B-511E68EE'
           , 'nokia': 'HGHGJHgdbndbmbsdf7675wefdvvdsnb'
         }
+        , providers: {
+          'custom': customProvider
+        }
       });
+
+      geoManager.setOptions({
+        providers: {
+          'custom': customProvider
+        }
+      });
+
 
       geoManager.addTo(map);
 
