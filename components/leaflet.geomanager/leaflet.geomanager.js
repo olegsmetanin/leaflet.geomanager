@@ -116,8 +116,10 @@ L.GeoManager = L.Class.extend({
         }
     }
 
-    , setOptions:function (options) {
+    , setOptions:function (in_options) {
         var that = this;
+
+        var options = L.extend({}, in_options);
 
         if (options) {
             if (options.providers) {

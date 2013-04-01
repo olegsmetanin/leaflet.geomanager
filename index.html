@@ -682,7 +682,7 @@ pre.prettyprint {
         )
       }
 
-      var geoManager = new L.GeoManager({
+      var geoOptions = {
         apikeys: {
           'bing': 'Anqm0F_JjIZvT0P3abS6KONpaBaKuTnITRrnYuiJCE0WOhH6ZbE4DzeT6brvKVR5'
           , 'mapquest': 'Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq'
@@ -692,16 +692,15 @@ pre.prettyprint {
         , providers: {
           'custom': customProvider
         }
-      });
+      }
+
+      var geoManager = new L.GeoManager(geoOptions);
 
       geoManager.setOptions({
         providers: {
           'custom': customProvider
         }
       });
-
-
-      geoManager.addTo(map);
 
       // setActiveTab call from dynamic bootstrap tabs in identifier window
       function setActiveTab(e) {
