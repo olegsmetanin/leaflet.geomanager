@@ -99,19 +99,19 @@ L.GeoManager = L.Class.extend({
         return this;
     }
 
-    , _initLayers: function() {
+    , _initLayers: function(options) {
         var that = this;
 
         if (that._map) {
-            if (that.options.baselayer) {
+            if (!options || options.baselayer) {
                 that.setLayer(that.options.baselayer, 'baselayer')
             }
 
-            if (that.options.overlay) {
+            if (!options || options.overlay) {
                 that.setLayer(that.options.overlay, 'overlay')
             }
 
-            if (that.options.interactivelayer) {
+            if (!options || options.interactivelayer) {
                 that.setLayer(that.options.interactivelayer, 'interactivelayer')
             }
         }
@@ -134,7 +134,7 @@ L.GeoManager = L.Class.extend({
 
             L.setOptions(this, options);
 
-            that._initLayers();
+            that._initLayers(options);
 
         }
 
@@ -142,6 +142,12 @@ L.GeoManager = L.Class.extend({
     }
 
     , setLayer: function(name, type) {
+
+        if (!this.options.providers[name]) {
+            console.error('L.GeoManager: cant find provider "%s"', name);
+            return;
+        }
+
         var that=this
         , layerFn = that.options.providers[name]
         , layerFnProxy = $.proxy(layerFn, that)
@@ -169,6 +175,12 @@ L.GeoManager = L.Class.extend({
     }
 
     , geocode:function(query) {
+
+        if (!this.options.providers[this.options.geocoder]) {
+            console.error('L.GeoManager: cant find geocoder provider "%s"', this.options.geocoder);
+            return;
+        }
+
         var that=this
             , geocoder=this.options.geocoder
             , geoFn = this.options.providers[geocoder]
