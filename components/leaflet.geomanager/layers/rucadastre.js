@@ -32,7 +32,9 @@ L.RuCadastre = L.Class.extend({
 
     , setOptions: function (newOptions) {
         L.setOptions(this, newOptions);
-        this._reset();
+        if (this._map) {
+            this._reset();
+        }
     }
 
     , onAdd: function (map) {
@@ -313,7 +315,8 @@ L.RuCadastreIdentify = L.Control.extend({
                 that._popup.setLatLng(latlng).setContent(that.options.template(identify_data, null)).addTo(that._map);
                 that._map.openPopup(that._popup);
 
-                var cadnum = identify_data.results[0].attributes['Строковый идентификатор ИПГУ']
+                var cadprop = layerId<4 ? 'Кадастровый номер земельного участка' : 'Кадастровый номер'
+                    , cadnum =identify_data.results[0].attributes[cadprop] //identify_data.results[0].attributes['Строковый идентификатор ИПГУ']
                     , findUrl = that.options.findurl + '/find?cadNums=[%27'+cadnum+'%27]&onlyAttributes=false&returnGeometry=true&f=json'
                 if (!(typeof cadnum === 'undefined')) {
                     $.ajax({url:findUrl,dataType:'jsonp'})

@@ -70,7 +70,7 @@ L.WikimapiaJSON = L.FeatureGroup.extend({
 
 });
 
-L.WikimapiaAPI = L.Class.extend({
+L.WikimapiaInteractive = L.Class.extend({
     includes: L.Mixin.Events
 
     , timer: null
@@ -90,6 +90,7 @@ L.WikimapiaAPI = L.Class.extend({
         that._hash = {};
         that._mouseIsDown = false;
         that._popupIsOpen = false;
+        that._layer=new L.LayerGroup([]);
     }
 
     , setOptions: function (newOptions) {
@@ -103,6 +104,7 @@ L.WikimapiaAPI = L.Class.extend({
  		var that = this;
 
         that._map = map;
+        that._layer.addTo(that._map);
 
         map.on('viewreset', that._update, that);
         map.on('moveend', that._update, that);
@@ -113,6 +115,7 @@ L.WikimapiaAPI = L.Class.extend({
         map.on('mouseup', that._mouseup, that);
         map.on('popupopen', that._popup_open, that);
         map.on('popupclose', that._popup_close, that);
+
 
         that._update();
     }
@@ -129,8 +132,6 @@ L.WikimapiaAPI = L.Class.extend({
         map.off('mouseup', that._mouseup, that);
         map.off('popupopen', that._popup_open, that);
         map.off('popupclose', that._popup_close, that);
-
-
     }
 
    , addTo: function (map) {
@@ -169,15 +170,17 @@ L.WikimapiaAPI = L.Class.extend({
 
 		if (!((that._feature && that._feature.id==feature.id) || that._popupIsOpen)) {
 			that._hideFeature();
-
-			that._feature = feature;
+			//Deep copy
+			var poly = jQuery.extend(true, {}, feature.polygon);
+			that._feature = jQuery.extend(true, {}, feature);
+			that._feature.polygon = poly;
 
 			if (that.options.onActiveFeature) {
 				that.options.onActiveFeature(that._feature, that._feature.polygon);
 			}
 
-			if (that.options.style) {
-				that._feature.polygon.setStyle(that.options.style(that._feature));
+			if (that.options.onActiveFeatureStyle) {
+				that._feature.polygon.setStyle(that.options.onActiveFeatureStyle(that._feature));
 			}
 
 			that._feature.polygon
@@ -292,14 +295,41 @@ L.WikimapiaAPI = L.Class.extend({
 	    return inside;
 	}
 
+
+    , _draw: function() {
+
+		var that = this
+			, polygons = []
+			, bounds = that._map.getBounds()
+			, c = 0
+			, list = that._filter(that._hash, function(item) {
+				c++;
+				return bounds.contains(item.polygon.getBounds())
+			});
+
+			that._layer.clearLayers();
+
+			console.log('_draw: '+list.length + ' from '+ c);
+
+			for (var i=0; i<list.length;i++) {
+				var poly = list[i].polygon;
+				if (that.options.style) {
+					poly.setStyle(that.options.style(that._feature));
+				}
+				that._layer.addLayer(poly);
+			}
+
+    }
+
 	, _update: function () {
 		var that = this;
+		//that._draw();
 
-        if (that.timer) {
+/*        if (that.timer) {
         	window.clearTimeout(that.timer);
         }
-
-		that.timer = window.setTimeout(function() {
+*/
+/*		that.timer = window.setTimeout(function() {*/
 
 				that.counter++;
 		        $.ajax({
@@ -313,6 +343,7 @@ L.WikimapiaAPI = L.Class.extend({
 		                , 'format' : 'jsonp'
 		                , 'count' : '100'
 		                , 'pack' : 'gzip'
+		                , 'language' : (window.navigator.userLanguage || window.navigator.language).split('-')[0]
 		            }
 	              	, jsonpCallback: 'wikimapiacallback'+that.counter
 	              	, success: function(data) {
@@ -329,14 +360,175 @@ L.WikimapiaAPI = L.Class.extend({
 	            					, bounds: L.latLngBounds([item.location.south, item.location.west],[item.location.north, item.location.east])
 	            					, polygon: that._wikiPointsToPolygon(item.polygon)
 	            				};
-		            			//that._hash[item.id].polygon.addTo(that._map);
 		            		}
+
+		            		//that._draw();
 
 				        }
 				    }
 		        })
 
-	    },0);
+/*	    },0);*/
+
+	    }
+})
+
+L.WikimapiaFeatures = L.Class.extend({
+    includes: L.Mixin.Events
+
+    , timer: null
+    , mouseMoveTimer: null
+    , counter: 0
+    , options: {
+         url:'http://api.wikimapia.org/'
+        , opacity: 1
+        , attribution: '<a href="http://wikimapia.org" target="_blank">Wikimapia.org</a>'
+
+    }
+
+    , initialize: function (options) {
+		var that = this;
+
+        L.setOptions(that, options);
+        that._hash = {};
+        that._layer=new L.FeatureGroup([]);
+    }
+
+    , setOptions: function (newOptions) {
+ 		var that = this;
+
+        L.setOptions(that, newOptions);
+        that._update();
+    }
+
+    , onAdd: function (map) {
+ 		var that = this;
+
+        that._map = map;
+
+		that._layer.addTo(that._map);
+
+        map.on('viewreset', that._update, that);
+        map.on('moveend', that._update, that);
+        map.on('zoomend', that._update, that);
+
+        that._update();
+    }
+
+    , onRemove: function (map) {
+ 		var that = this;
+
+        map.off('viewreset', that._update, that);
+        map.off('moveend', that._update, that);
+        map.off('zoomend', that._update, that);
+    }
+
+   , addTo: function (map) {
+        map.addLayer(this);
+        return this;
+    }
+
+    , getAttribution: function () {
+        return this.options.attribution;
+    }
+
+    , _wikiPointsToPolygon: function (polyPoints) {
+
+		coords = [];
+
+		for (j=0;j<polyPoints.length;j++) {
+			coords.push([polyPoints[j].y,polyPoints[j].x]);
+		}
+
+		return new L.Polygon(coords);
+
+    }
+
+    , _filter: function(obj, predicate) {
+		var res=[];
+
+		$.each(obj, function(index,item) {
+			if (predicate(item)) {res.push(item)}
+		});
+
+		return res;
+    }
+
+    , _draw: function() {
+
+		var that = this
+			, polygons = []
+			, bounds = that._map.getBounds()
+			, c = 0
+			, list = that._filter(that._hash, function(item) {
+				c++;
+				return bounds.intersects(item.polygon.getBounds()) || bounds.contains(item.polygon.getBounds())
+			});
+
+			that._layer.clearLayers();
+
+			console.log('_draw: '+list.length + ' from '+ c);
+
+			for (var i=0; i<list.length;i++) {
+				that._layer.addLayer(list[i].polygon);
+			}
+
+
+    }
+
+	, _update: function () {
+		console.log('update');
+
+		var that = this;
+
+		that._draw();
+
+/*        if (that.timer) {
+        	window.clearTimeout(that.timer);
+        }*/
+
+/*		that.timer = window.setTimeout(function() {
+*/
+          		console.log('ajaxin');
+				that.counter++;
+		        $.ajax({
+		            url : that.options.url
+		            , dataType : 'jsonp'
+		            , jsonp : 'jsoncallback'
+		            , data : {
+		                'function' : 'box'
+		                , 'bbox' : that._map.getBounds().toBBoxString()
+		                , 'key' : that.options.key
+		                , 'format' : 'jsonp'
+		                , 'count' : '100'
+		                , 'pack' : 'gzip'
+		            }
+	              	, jsonpCallback: 'wikimapiacallback'+that.counter
+	              	, success: function(data) {
+          				console.log('success');
+	              		that.counter--;
+			            if (data) {
+
+		            		for (var i=0;i<data.folder.length;i++) {
+		            			var item = data.folder[i];
+
+	            				that._hash[item.id] = {
+	            					id: item.id
+	            					, name: item.name
+	            					, url : item.url
+	            					, bounds: L.latLngBounds([item.location.south, item.location.west],[item.location.north, item.location.east])
+	            					, polygon: that._wikiPointsToPolygon(item.polygon)
+	            				};
+		            		}
+
+            				that._draw();
+
+				        }
+				    }
+		        })
+
+          		console.log('ajaxout');
+/*	    },0);*/
 
 	    }
 })

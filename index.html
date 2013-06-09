@@ -8,17 +8,43 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
 
+    <!--
+    Local resources
+    -->
+
+    <link href="components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="components/leaflet/leaflet.css" rel="stylesheet" />
+    <link href="components/prettify/prettify.css" rel="stylesheet" />
+
+
+    <!--
+    CDN resources
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" rel="stylesheet" />
+    <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+    <link href="http://leaflet.github.com/Leaflet.label/leaflet.label.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.png">
+
+    -->
+
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
     <![endif]-->
 
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
 
-    <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
-
-    <link href="http://leaflet.github.com/Leaflet.label/leaflet.label.css" rel="stylesheet" />
 
     <link href="components/jquery.select2/select2.css" rel="stylesheet" />
     <link href="components/jquery.select2/select2-bootstrap.css" rel="stylesheet" />
@@ -120,6 +146,10 @@ section {
 }
 
 
+
+
+
+
 .footer {
     background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;
@@ -144,23 +174,17 @@ pre.prettyprint {
 }
 
 
+
+
+
     </style>
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.png">
   </head>
 
   <body data-target=".bs-docs-sidebar" data-spy="scroll">
+
+
 
     <header class="jumbotron" id="overview">
       <div class="container">
@@ -186,6 +210,7 @@ pre.prettyprint {
 
         <div class="span9">
 
+
           <section id="example">
             <div class="page-header">
               <h1>Example</h1>
@@ -201,90 +226,240 @@ pre.prettyprint {
                       <span class="caret">
                       </span>
                   </button>
-                  <ul class="dropdown-form" style="width:800px;">
+                  <ul class="dropdown-form" style="width: 830px;">
                     <li>
-                      <form style="margin:15px;">
-                        <div class="row" style="margin-top:10px;">
-                          <div class="span4">
-                            <div class="control-group">
-                              <label class="control-label">Base Layer</label>
-                              <div class="controls">
-                                <select id="baselayer" class="select2" style="width:350px;">
-                                  <option value="osm">OpenStreetMap Default</option>
+                        <div class="row" style="">
 
-                                  <option value="google">Google</option>
-                                  <option value="google-satellite">Google Satellite</option>
-                                  <option value="google-hybrid">Google Hybrid</option>
-                                  <option value="google-terrain">Google Terrain</option>
 
-                                  <option value="bing">Bing</option>
-                                  <option value="bing-aerial">Bing Aerial</option>
-                                  <option value="bing-hybrid">Bing Hybrid</option>
+  <!-- Layer Dialog begin -->
+  <div class="span4" style="margin-left: 60px; max-height:360px; overflow-y: auto;">
 
-                                  <option value="esri">ESRI</option>
-                                  <option value="esri-topo">ESRI WorldTopoMap</option>
-                                  <option value="esri-imagery">ESRI WorldImagery</option>
 
-                                  <option value="osmbw">OpenStreetMap Black and White</option>
-                                  <option value="opencyclemap">OpenCycleMap default</option>
-                                  <option value="opencyclemap-transport">OpenCycleMap Transport</option>
-                                  <option value="opencyclemap-landscape">OpenCycleMap Landscape</option>
-                                  <option value="mapquest">MapQuest</option>
-                                  <option value="mapquest-aerial">MapQuest Aerial</option>
 
-                                  <option value="yandex">Yandex</option>
-                                  <option value="yandex-satellite">Yandex Satellite</option>
-                                  <option value="yandex-hybrid">Yandex Hybrid</option>
-                                  <option value="yandex-publicmap">Yandex Public Map</option>
-                                  <option value="yandex-publicmap-hybrid">Yandex Public Hybrid</option>
-                                  <option value="wikimapia">Wikimapia OSM</option>
+  Interactive layers
 
-                                  <option value="stamen-toner">Stamen Toner</option>
-                                  <option value="stamen-terrain">Stamen Terrain</option>
-                                  <option value="stamen-watercolor">Stamen Watercolor</option>
 
-                                  <option value="none">None</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
+  <ul class="nav nav-list bs-docs-sidenav geomanager-layers" style="width: auto; min-height:30px; border: 1px solid #DDDDDD; padding:8px; margin:0;" data-geomanager-interactivelayers="geoman0">
 
-                          <div class="span4">
-                            <div class="control-group">
-                              <label class="control-label">Overlay</label>
-                              <div class="controls">
-                                <select id="overlay" class="select2" style="width:350px;">
-                                  <option value="none">None</option>
-                                  <option value="wikimapia-hybrid">Wikimapia Hybrid</option>
-                                  <option value="rucadastre">Russian cadastre</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
+    <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.GoogleIdentify", "title":"Google Identify"}'>
+        <a class="clearfix"  href="#" >Google Identify</a>
+    </li>
+
+  </ul>
+
+  Overlays
+
+  <ul class="nav nav-list bs-docs-sidenav geomanager-layers" style="width: auto; min-height:30px; border: 1px solid #DDDDDD; padding:8px; margin:0;" data-geomanager-overlays="geoman0">
+  </ul>
+
+  Base layers
+
+  <ul class="nav nav-list bs-docs-sidenav geomanager-layers" style="width: auto; min-height:30px; border: 1px solid #DDDDDD; padding:8px; margin:0;"  data-geomanager-baselayers="geoman0">
+
+    <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.OSM", "title":"OpenStreetMap"}'>
+        <a class="clearfix" href="#">OpenStreetMap</a>
+    </li>
+
+  </ul>
+
+
+  </div>
+
+  <div class="span4">
+
+
+<div style="min-height:60px; max-height:360px; overflow-y: auto;">
+
+<div class="accordion" data-geomanager-sourcelayers="geoman0">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" href="#interactivelayers">
+      Interactive layers
+      </a>
+    </div>
+    <div id="interactivelayers" class="accordion-body collapse in">
+      <div class="accordion-inner" style="padding:0;">
+
+        <ul class="nav nav-list bs-docs-sidenav" style="width: auto; padding:8px; margin:0;" >
+
+            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.OSMIdentify", "title":"OpenStreetMap Identify"}'>
+                <a class="clearfix"  href="#" >OpenStreetMap Identify</a>
+            </li>
+            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.GoogleIdentify", "title":"Google Identify"}'>
+                <a class="clearfix"  href="#" >Google Identify</a>
+            </li>
+            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.BingIdentify", "title":"Bing Identify"}'>
+                <a class="clearfix"  href="#" >Bing Identify</a>
+            </li>
+            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.YandexIdentify", "title":"Yandex Identify"}'>
+                <a class="clearfix"  href="#" >Yandex Identify</a>
+            </li>
+            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.WikimapiaInteractive", "title":"Wikimapia Iteractive"}'>
+                <a class="clearfix"  href="#" >Wikimapia Iteractive</a>
+            </li>
+            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.RuCadastreIdentify", "title":"RuCadastre Identify"}'>
+                <a class="clearfix"  href="#" >RuCadastre Identify</a>
+            </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" href="#overlays">
+      Overlays
+      </a>
+    </div>
+    <div id="overlays" class="accordion-body collapse">
+      <div class="accordion-inner" style="padding:0;">
+
+        <ul class="nav nav-list bs-docs-sidenav" style="width: auto; padding:8px; margin:0;">
+
+<!--             <li data-geomanager-provider="arcgis" data-geomanager-options='{"title":"White background", "sublayers":{"list":["0","1","2"]}}'>
+                <a class="clearfix"  href="#" >ArcGIS WMS</a>
+            </li> -->
+
+            <li data-geomanager-type="overlays" data-geomanager-options='{"providername":"L.GeoManager.ArcGIS_EPSG900913_Overlay", "title":"RuCadastre Overlay", "url":"http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/Cadastre/MapServer"}'>
+                <a class="clearfix"  href="#" >RuCadastre Overlay</a>
+            </li>
+
+            <li data-geomanager-type="overlays" data-geomanager-options='{"providername":"L.GeoManager.WikimapiaOverlay", "title":"Wikimapia Overlay"}'>
+                <a class="clearfix" href="#">Wikimapia Overlay</a>
+            </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" href="#baselayers">
+      Base Layers
+      </a>
+    </div>
+    <div id="baselayers" class="accordion-body collapse">
+      <div class="accordion-inner" style="padding:0;">
+
+        <ul class="nav nav-list bs-docs-sidenav" style="width: auto; padding:8px; margin:0;">
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"customProvider", "title":"Custom Provider"}'>
+                <a class="clearfix" href="#">Custom Provider</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.White", "title":"White background"}'>
+                <a class="clearfix" href="#">White background</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.Black", "title":"Black background"}'>
+                <a class="clearfix" href="#">Black background</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.OSM", "title":"OpenStreetMap"}'>
+                <a class="clearfix" href="#">OpenStreetMap</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.OSMBW", "title":"OpenStreetMap Black and White"}'>
+                <a class="clearfix" href="#">OpenStreetMap Black and White</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.OSMCloudMade", "title":"OpenStreetMap CloudMade"}'>
+                <a class="clearfix" href="#">OpenStreetMap CloudMade</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.OpenCycleMap", "title":"OpencycleMap"}'>
+                <a class="clearfix" href="#">OpencycleMap</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.OpenCycleMapTransport", "title":"OpencycleMap Transport"}'>
+                <a class="clearfix" href="#">OpencycleMap Transport</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.OpenCycleMapLandscape", "title":"OpencycleMap Landscape"}'>
+                <a class="clearfix" href="#">OpencycleMap Landscape</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.MapQuest", "title":"Mapquest"}'>
+                <a class="clearfix" href="#">Mapquest</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.MapQuestAerial", "title":"Mapquest Aerial"}'>
+                <a class="clearfix" href="#">Mapquest Aerial</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.StamenToner", "title":"Stamen Toner"}'>
+                <a class="clearfix" href="#">Stamen Toner</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.StamenTerrain", "title":"Stamen Terrain"}'>
+                <a class="clearfix" href="#">Stamen Terrain</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.StamenWatercolor", "title":"Stamen Watercolor"}'>
+                <a class="clearfix" href="#">Stamen Watercolor</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.ESRIStreetMap", "title":"ESRI Street Map"}'>
+                <a class="clearfix" href="#">ESRI Street Map</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.ESRITopoMap", "title":"ESRI Topo Map"}'>
+                <a class="clearfix" href="#">ESRI Topo Map</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.ESRIImagery", "title":"ESRI Imagery"}'>
+                <a class="clearfix" href="#">ESRI Imagery</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.GoogleRoadmap", "title":"Google Roadmap"}'>
+                <a class="clearfix" href="#">Google Roadmap</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.GoogleSatellite", "title":"Google Satellite"}'>
+                <a class="clearfix" href="#">Google Satellite</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.GoogleHybrid", "title":"Google Hybrid"}'>
+                <a class="clearfix" href="#">Google Hybrid</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.GoogleTerrain", "title":"Google Terrain"}'>
+                <a class="clearfix" href="#">Google Terrain</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.BingRoad", "title":"Bing Road"}'>
+                <a class="clearfix" href="#">Bing Road</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.BingAerial", "title":"Bing Aerial"}'>
+                <a class="clearfix" href="#">Bing Aerial</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.BingAerialWithLabels", "title":"Bing Aerial with labels"}'>
+                <a class="clearfix" href="#">Bing Aerial with labels</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.YandexMap", "title":"Yandex Map"}'>
+                <a class="clearfix" href="#">Yandex Map</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.YandexSatellite", "title":"Yandex Satellite"}'>
+                <a class="clearfix" href="#">Yandex Satellite</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.YandexHybrid", "title":"Yandex Hybrid"}'>
+                <a class="clearfix" href="#">Yandex Hybrid</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.YandexPublicMap", "title":"Yandex PublicMap"}'>
+                <a class="clearfix" href="#">Yandex PublicMap</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.YandexPublicMapHybrid", "title":"Yandex PublicMap Hybrid"}'>
+                <a class="clearfix" href="#">Yandex PublicMap Hybrid</a>
+            </li>
+            <li data-geomanager-type="baselayers" data-geomanager-options='{"providername":"L.GeoManager.Wikimapia", "title":"Wikimapia"}'>
+                <a class="clearfix" href="#">Wikimapia</a>
+            </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+</div>
+
+</div>
+
+  <!-- Layer Dialog end -->
+
+
+  <ul id="geoman0drag" class="nav nav-list bs-docs-sidenav"></ul>
+
+
                         </div>
-                      </form>
                     </li>
                   </ul>
                 </div>
 
-                <div class="input-prepend">
-
-                  <button class="btn" type="button" data-select2-open="interactivelayer">
-                    <i class="icon-info-sign"></i>
-                  </button>
-
-                  <select id="interactivelayer" class="select2" style="width:150px;">
-                    <option value="none">None</option>
-                    <option value="wikimapia-api">Wikimapia API</option>
-                    <option value="osm-identify">OSM Identify</option>
-                    <option value="google-identify">Google Identify</option>
-                    <option value="bing-identify">Bing Identify</option>
-                    <option value="yandex-identify">Yandex Identify</option>
-                    <option value="rucadastre-identify">Russian cadastre</option>
-                  </select>
-
-
-                </div>
 
                 <div class="input-prepend">
 
@@ -303,17 +478,16 @@ pre.prettyprint {
                   </button>
 
                   <select id="geocoder" class="select2" style="width:200px;">
-                    <option value="osm-geocode">OpenStreetMap</option>
-                    <option value="google-geocode">Google</option>
-                    <option value="bing-geocode">Bing</option>
-                    <option value="esri-geocode">ESRI</option>
-                    <option value="geonames-geocode">Geonames</option>
-                    <option value="mapquest-geocode">MapQuest</option>
-                    <option value="nokia-geocode">Nokia</option>
-                    <option value="yandex-geocode">Yandex</option>
-                    <option value="rucadastre-geocode">RuCadastre (parcel numbers)</option>
+                    <option value="L.GeoManager.OSMGeocode">OpenStreetMap</option>
+                    <option value="L.GeoManager.GoogleGeocode">Google</option>
+                    <option value="L.GeoManager.BingGeocode">Bing</option>
+                    <option value="L.GeoManager.ESRIGeocode">ESRI</option>
+                    <option value="L.GeoManager.GeonamesGeocode">Geonames</option>
+                    <option value="L.GeoManager.MapQuestGeocode">MapQuest</option>
+                    <option value="L.GeoManager.NokiaGeocode">Nokia</option>
+                    <option value="L.GeoManager.YandexGeocode">Yandex</option>
+                    <option value="L.GeoManager.RuCadastreGeocode">RuCadastre (parcel numbers)</option>
                   </select>
-
                 </div>
 
               </div>
@@ -392,6 +566,8 @@ pre.prettyprint {
             <div class="page-header">
               <h1>Usage</h1>
             </div>
+
+
 
 
             <h3>Add script</h3>
@@ -558,6 +734,24 @@ pre.prettyprint {
       </div>
     </div> <!-- /container -->
 
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+
       <div class="footer">
         <div class="container">
           <p class="copyright">
@@ -566,6 +760,8 @@ pre.prettyprint {
         </div>
       </div>
 
+
+
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -573,22 +769,56 @@ pre.prettyprint {
     <!-- GEO Ip Locator Script -->
     <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script>
 
+
     <!-- Date.format -->
+    <!-- CDN
+
     <script src="http://stevenlevithan.com/assets/misc/date.format.js"></script>
+    -->
+
+    <!-- Local
+    -->
+    <script src="components/date.format/date.format.js"></script>
+
+
 
     <!-- jQuery -->
+    <!-- CDN
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    -->
+    <!-- Local
+    -->
+    <script src="components/jquery/jquery.min.js"></script>
+    <script src="components/jquery.ui/jquery.ui.js"></script>
+
+
+
+
     <script src="components/jquery.select2/select2.js"></script>
 
-
     <!-- Bootstrap -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <!-- CDN
+
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    -->
+    <!-- Local
+    -->
+    <script src="components/bootstrap/js/bootstrap.min.js"></script>
+
+
     <script src="components/bootstrap.dropdownform/bootstrap.dropdownform.js"></script>
 
 
     <!-- Leaflet -->
+    <!-- CDN
+
     <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
-<!--     <script src="components/leaflet/leaflet-src.js"></script> -->
+    -->
+    <!-- Local
+    -->
+    <script src="components/leaflet/leaflet-src.js"></script>
 
     <script src="components/leaflet.label/leaflet.label-src.js"></script>
 
@@ -596,108 +826,98 @@ pre.prettyprint {
     <script src="components/leaflet.geomanager/layers/yandex.js"></script>
     <script src="components/leaflet.geomanager/layers/google.js"></script>
     <script src="components/leaflet.geomanager/layers/bing.js"></script>
+    <script src="components/leaflet.geomanager/layers/arcgis.js"></script>
     <script src="components/leaflet.geomanager/layers/rucadastre.js"></script>
 
     <script src="components/leaflet.geomanager/leaflet.geomanager.js"></script>
-    <script src="components/leaflet.geomanager/providers/yandex.js"></script>
-    <script src="components/leaflet.geomanager/providers/cadastre.js"></script>
+    <script src="components/leaflet.geomanager/providers/common.js"></script>
+    <script src="components/leaflet.geomanager/providers/rucadastre.js"></script>
 
 
 
     <!-- Google prettify -->
-    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+    <!-- CDN
 
+    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+    -->
+    <!-- Local
+    -->
+   <script src="components/prettify/prettify.js"></script>
 
 
     <script>
 
-      function format(option) {
-          if (!option.id) return option.text; // optgroup
-
-          return ''
-            + '<table><tbody><tr><td>'
-            + '<p class="thumbnail" style="margin: 4px 0 0 0;"><img src="components/leaflet.geomanager/img/1x1.png" class="layer-thumbnail layer-thumb-'+option.id+'"></img></p>'
-            + '</td><td style="width:80px; white-space: normal;"><p style="margin:4px 0 0 4px;  line-height: 20px;">' + option.text+'</p>'
-            + '</td></tr></tbody></table>'
-      }
-
-
       $('.select2').select2();
+
       $('button[data-select2-open]').click(function(){
         $('#' + $(this).data('select2-open')).select2('open');
       });
 
-      $('#baselayer').select2({
-          formatResult: format,
-          formatSelection: format,
-          escapeMarkup: function(m) { return m; }
-      });
-
-      $('#overlay').select2({
-          formatResult: format,
-          formatSelection: format,
-          escapeMarkup: function(m) { return m; }
-      });
-
-      $('#baselayer').on('change', function (e) {
-        geoManager.setOptions({baselayer: e.val});
-      })
-
-      $('#overlay').on('change', function (e) {
-        geoManager.setOptions({overlay: e.val});
-      })
-
-      $('#interactivelayer').on('change', function (e) {
-        geoManager.setOptions({interactivelayer: e.val});
-      })
-
-      $('#geocoder').on('change', function (e) {
-          geoManager.setOptions({geocoder:e.val})
-      })
-
       $('#geocodebutton').on('click', function(e) {
-          geoManager.geocode( $('#geocodeinput').val())
+          geoManager.geocode({providername: $('#geocoder').val(), query:$('#geocodeinput').val()});
       });
 
       $('#geocodeinput').on('keydown', function(e) {
         if (e.keyCode == 13 ) {
           e.preventDefault();
-          geoManager.geocode( $('#geocodeinput').val())
+          geoManager.geocode({providername: $('#geocoder').val(), query:$('#geocodeinput').val()});
         }
       });
 
-
+      //var map = L.map('map').setView([55.751666676667,37.617777787778], 13);
       var map = L.map('map').setView([geoip_latitude(),  geoip_longitude()], 13);
 
       L.control.scale().addTo(map);
 
-      var customProvider = function(arg) {
-        arg.cb(
-          new L.TileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            , {
-                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-            }
-          )
-        )
-      }
+      var customProvider = function (layer_options) {
+            var dfd = new jQuery.Deferred()
+                , layer = new L.TileLayer.WMS("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
+                  layers: 'nexrad-n0r-900913',
+                  format: 'image/png',
+                  transparent: true,
+                  attribution: "Weather data &copy; 2011 IEM Nexrad",
+                  opacity: 0.4
+                });
+
+            layer.geomanager = {
+                options: layer_options
+                , renderOptionsForm: function() {
+                  var html = ''
+                      + '<span>Opacity: <input name="opacity" type="text" value="1.0"></span>';
+
+                  $node = $(html);
+
+                  $node.find('input[name="opacity"]').on('change', function (e) {
+
+                      layer.setOpacity($(e.target).val());
+
+                  });
+
+                  return $node;
+              }
+            };
+
+            dfd.resolve(layer);
+
+            return dfd.promise();
+        }
+
+
+
+      L.GeoManager.prototype.registerAPIKeys([
+        {name: 'bing', value: 'Anqm0F_JjIZvT0P3abS6KONpaBaKuTnITRrnYuiJCE0WOhH6ZbE4DzeT6brvKVR5'}
+        , {name: 'mapquest', value: 'Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq'}
+        , {name: 'wikimapia', value: '60175C48-4B0C86C-A2D4D106-A5F37CAF-5A760C96-45526DF2-6D90C63B-511E68EE'}
+        , {name: 'nokia', value: 'HGHGJHgdbndbmbsdf7675wefdvvdsnb'}
+        , {name: 'cloudmade', value: 'cludmadeapikey'}
+      ]);
+
 
       var geoOptions = {
-        apikeys: {
-          'bing': 'Anqm0F_JjIZvT0P3abS6KONpaBaKuTnITRrnYuiJCE0WOhH6ZbE4DzeT6brvKVR5'
-          , 'mapquest': 'Kmjtd%7Cluua2qu7n9%2C7a%3Do5-lzbgq'
-          , 'wikimapia': '60175C48-4B0C86C-A2D4D106-A5F37CAF-5A760C96-45526DF2-6D90C63B-511E68EE'
-          , 'nokia': 'HGHGJHgdbndbmbsdf7675wefdvvdsnb'
-        }
+        tag: 'geoman0'
       }
 
       var geoManager = new L.GeoManager(geoOptions);
-
-      geoManager.setOptions({
-        providers: {
-          'custom': customProvider
-        }
-      });
 
       geoManager.addTo(map);
 
