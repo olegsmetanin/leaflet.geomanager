@@ -12,7 +12,7 @@ L.RuCadastre = L.Class.extend({
     includes: L.Mixin.Events
 
     , options: {
-         url:'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/Cadastre/MapServer'
+         url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer'
         , bboxsr:'102100'
         , imagesr:'102100'
         , format: 'PNG8'
@@ -237,8 +237,8 @@ L.RuCadastreIdentify = L.Control.extend({
                     'Вид разрешенного использования (код):'+attr['Вид разрешенного использования (код)']+'<br/>'+
                     'Значение кадастровой стоимости:'+attr['Значение кадастровой стоимости']+'<br/>';
                 }
-                , url:'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/CadastreSelected/MapServer'
-                , findurl:'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/Cadastre/MapServer/exts/GKNServiceExtension/online/parcel'
+                , url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer'
+                , findurl:'http://maps.rosreestr.ru/ArcGIS/rest/services/Cadastre/Cadastre/MapServer/exts/GKNServiceExtension/online/parcel'
     }
 
     , onAdd: function (map) {

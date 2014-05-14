@@ -85,7 +85,7 @@ L.GeoManager.RuCadastreGeocode = function (options) {
     if (cadparts.length==4) {
         ajaxtype='find';
         ajaxopt = {
-            url : 'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/Cadastre/MapServer/exts/GKNServiceExtension/online/parcel/find'
+            url : 'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer/exts/GKNServiceExtension/online/parcel/find'
             , dataType : 'jsonp'
             , data : {
                 'f' : 'json'
@@ -106,7 +106,7 @@ L.GeoManager.RuCadastreGeocode = function (options) {
         }
 
         ajaxopt = {
-            url : 'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/Cadastre/MapServer/'+zoom+'/query'
+            url : 'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer/'+zoom+'/query'
             , dataType : 'jsonp'
             , data : {
                 'f' : 'json'
@@ -163,7 +163,7 @@ L.GeoManager.RuCadastreGeocode = function (options) {
                 layers=layers+lids[i];
                 layerDefs=layerDefs+lids[i]+'%3APKK_ID%20LIKE%20%27'+id+'%27';
 
-            var layer = new L.RuCadastre({url:'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/CadastreSelected/MapServer', layers:layers, layerDefs:layerDefs, opacity: 0.5});
+            var layer = new L.RuCadastre({url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer', layers:layers, layerDefs:layerDefs, opacity: 0.5});
 
             dfd.resolve({
                 content : content
