@@ -6,7 +6,7 @@ L.ArcGIS_EPSG900913 = L.Class.extend({
     includes: L.Mixin.Events
 
     , options: {
-         url:'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/Cadastre/MapServer'
+         url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer'
         , bboxsr:'102100'
         , imagesr:'102100'
         , format: 'PNG8'
