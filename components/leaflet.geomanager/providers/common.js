@@ -500,7 +500,7 @@ L.GeoManager.ArgGIS = function (options) {
     var dfd = new jQuery.Deferred();
 
     ajaxopt = {
-	    url : 'http://maps.rosreestr.ru/ArcGIS/rest/services/CadastreNew/Cadastre/MapServer'
+	    url : 'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer'
 	    , dataType : 'jsonp'
 	    , data : {
 	        'f' : 'json'
