@@ -85,7 +85,7 @@ L.GeoManager.RuCadastreGeocode = function (options) {
     if (cadparts.length==4) {
         ajaxtype='find';
         ajaxopt = {
-            url : 'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer/exts/GKNServiceExtension/online/parcel/find'
+            url : 'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer/exts/GKNServiceExtension/online/parcel/find'
             , dataType : 'jsonp'
             , data : {
                 'f' : 'json'
@@ -106,7 +106,7 @@ L.GeoManager.RuCadastreGeocode = function (options) {
         }
 
         ajaxopt = {
-            url : 'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer/'+zoom+'/query'
+            url : 'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer/'+zoom+'/query'
             , dataType : 'jsonp'
             , data : {
                 'f' : 'json'
