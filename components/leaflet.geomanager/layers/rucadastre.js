@@ -238,7 +238,7 @@ L.RuCadastreIdentify = L.Control.extend({
                     'Значение кадастровой стоимости:'+attr['Значение кадастровой стоимости']+'<br/>';
                 }
                 , url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer'
-                , findurl:'http://maps.rosreestr.ru/ArcGIS/rest/services/Cadastre/Cadastre/MapServer/exts/GKNServiceExtension/online/parcel'
+                , findurl:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer/exts/GKNServiceExtension/online/parcel'
     }
 
     , onAdd: function (map) {
