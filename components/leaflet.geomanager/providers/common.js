@@ -101,6 +101,27 @@ L.GeoManager.ProvidersFactory = {
         }
     }
 
+    , createSimpleWMSTileLayerProvider: function (options) {
+        return function (layer_options) {
+            var dfd = new jQuery.Deferred()
+                , url = options.url
+                , opt = options;
+            delete opt['url'];
+            var layer = new L.TileLayer.WMS(url, opt);
+
+            layer.geomanager = {
+                options: layer_options
+                , renderOptionsForm: function () {
+                    return L.GeoManager.OptionsFormsFactory.tileLayer(layer);
+                }
+            };
+
+            dfd.resolve(layer);
+
+            return dfd.promise();
+        }
+    }
+
     , createGoogleLayerProvider: function (options) {
         return function (layer_options) {
             var dfd = new jQuery.Deferred();
@@ -488,6 +509,17 @@ L.GeoManager.WikimapiaOverlay = L.GeoManager.ProvidersFactory.createSimpleTileLa
     , attribution: '<a href="http://wikimapia.org" target="_blank">Wikimapia.org</a>'
 })
 
+L.GeoManager.UkrCadastre = L.GeoManager.ProvidersFactory.createSimpleWMSTileLayerProvider({
+    name: 'ukrcadastre'
+    , type: 'overlays'
+    , url: 'http://212.26.144.110/geowebcache/service/wms'
+    , layers: 'kadastr'
+    , format: 'image/png'
+    , transparent: true
+    , crs: L.CRS.EPSG900913
+    , maxZoom: 18
+    , attribution: '<a href="http://wikimapia.org" target="_blank">Wikimapia.org</a>'
+});
 
 /*
     Interactive layers

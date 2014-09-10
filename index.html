@@ -325,6 +325,10 @@ pre.prettyprint {
                 <a class="clearfix"  href="#" >RuCadastre Overlay</a>
             </li>
 
+            <li data-geomanager-type="overlays" data-geomanager-options='{"providername":"L.GeoManager.UkrCadastre", "title":"UkrCadastre Overlay"}'>
+                <a class="clearfix"  href="#" >UkrCadastre Overlay</a>
+            </li>
+
             <li data-geomanager-type="overlays" data-geomanager-options='{"providername":"L.GeoManager.WikimapiaOverlay", "title":"Wikimapia Overlay"}'>
                 <a class="clearfix" href="#">Wikimapia Overlay</a>
             </li>
@@ -767,7 +771,7 @@ pre.prettyprint {
     <!-- Placed at the end of the document so the pages load faster -->
 
     <!-- GEO Ip Locator Script -->
-    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script>
+    <!--<script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script> -->
 
 
     <!-- Date.format -->
@@ -864,8 +868,8 @@ pre.prettyprint {
         }
       });
 
-      //var map = L.map('map').setView([55.751666676667,37.617777787778], 13);
-      var map = L.map('map').setView([geoip_latitude(),  geoip_longitude()], 13);
+      var map = L.map('map').setView([37.783333,-122.416667], 13);
+      //var map = L.map('map').setView([geoip_latitude(),  geoip_longitude()], 13);
 
       L.control.scale().addTo(map);
 
