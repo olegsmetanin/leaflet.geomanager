@@ -509,8 +509,8 @@ L.GeoManager.WikimapiaOverlay = L.GeoManager.ProvidersFactory.createSimpleTileLa
     , attribution: '<a href="http://wikimapia.org" target="_blank">Wikimapia.org</a>'
 })
 
-L.GeoManager.UkrCadastre = L.GeoManager.ProvidersFactory.createSimpleWMSTileLayerProvider({
-    name: 'ukrcadastre'
+L.GeoManager.UACadastre = L.GeoManager.ProvidersFactory.createSimpleWMSTileLayerProvider({
+    name: 'uacadastre'
     , type: 'overlays'
     , url: 'http://212.26.144.110/geowebcache/service/wms'
     , layers: 'kadastr'
@@ -541,7 +541,7 @@ L.GeoManager.ArgGIS = function (options) {
 
 	$.ajax(ajaxopt)
     .done( function (layerinfo){
-		var layer =	new L.RuCadastre();
+		var layer =	new L.RUCadastre();
 
     	var geomanager={
             sublayers: layerinfo.layers
