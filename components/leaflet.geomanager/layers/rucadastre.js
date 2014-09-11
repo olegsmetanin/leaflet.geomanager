@@ -1,14 +1,14 @@
 /*! Copyright (c) 2013 Oleg Smith (http://olegsmith.com)
  *  Licensed under the MIT License.
  *
- *  L.RuCadastreIdentify uses jQuery for JSONP requests (http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js)
+ *  L.RUCadastreIdentify uses jQuery for JSONP requests (http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js)
  */
 
 /*
- * L.RuCadastre
+ * L.RUCadastre
  */
 
-L.RuCadastre = L.Class.extend({
+L.RUCadastre = L.Class.extend({
     includes: L.Mixin.Events
 
     , options: {
@@ -225,10 +225,10 @@ L.RuCadastre = L.Class.extend({
 
 
 /*
- * L.RuCadastreIdentify
+ * L.RUCadastreIdentify
  */
 
-L.RuCadastreIdentify = L.Control.extend({
+L.RUCadastreIdentify = L.Control.extend({
     options: {
                 template:function(identify_data, find_data) {
                     var attr=identify_data.results[0].attributes;
@@ -238,7 +238,7 @@ L.RuCadastreIdentify = L.Control.extend({
                     'Значение кадастровой стоимости:'+attr['Значение кадастровой стоимости']+'<br/>';
                 }
                 , url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer'
-                , findurl:'http://maps.rosreestr.ru/ArcGIS/rest/services/Cadastre/Cadastre/MapServer/exts/GKNServiceExtension/online/parcel'
+                , findurl:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer/exts/GKNServiceExtension/online/parcel'
     }
 
     , onAdd: function (map) {
@@ -305,7 +305,7 @@ L.RuCadastreIdentify = L.Control.extend({
 
 
                 if (typeof that._selected==='undefined') {
-                    that._selected = new L.RuCadastre({url:that.options.url, layers:layers, layerDefs:layerDefs, opacity: 0.5});
+                    that._selected = new L.RUCadastre({url:that.options.url, layers:layers, layerDefs:layerDefs, opacity: 0.5});
                     that._map.addLayer(that._selected);
                 } else {
                     that._selected.setOptions({layers:layers, layerDefs:layerDefs});

@@ -1,9 +1,9 @@
-L.GeoManager.RuCadastreIdentify = function (options) {
+L.GeoManager.RUCadastreIdentify = function (options) {
         var that = this;
 
         var dfd = new jQuery.Deferred();
 
-        var layer = new L.RuCadastreIdentify({template:function(identify_data, find_data) {
+        var layer = new L.RUCadastreIdentify({template:function(identify_data, find_data) {
             var identify_attr = identify_data.results[0].attributes
               , layerId = identify_data.results[0].layerId
               , find_attr = find_data ? find_data.features[0].attributes : null;
@@ -65,7 +65,7 @@ L.GeoManager.RuCadastreIdentify = function (options) {
 }
 
 
-L.GeoManager.RuCadastreGeocode = function (options) {
+L.GeoManager.RUCadastreGeocode = function (options) {
 
     var that=this
     , cadnum = options.query
@@ -163,7 +163,7 @@ L.GeoManager.RuCadastreGeocode = function (options) {
                 layers=layers+lids[i];
                 layerDefs=layerDefs+lids[i]+'%3APKK_ID%20LIKE%20%27'+id+'%27';
 
-            var layer = new L.RuCadastre({url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer', layers:layers, layerDefs:layerDefs, opacity: 0.5});
+            var layer = new L.RUCadastre({url:'http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/CadastreSelected/MapServer', layers:layers, layerDefs:layerDefs, opacity: 0.5});
 
             dfd.resolve({
                 content : content

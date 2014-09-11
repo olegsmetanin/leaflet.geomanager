@@ -297,8 +297,8 @@ pre.prettyprint {
             <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.WikimapiaInteractive", "title":"Wikimapia Iteractive"}'>
                 <a class="clearfix"  href="#" >Wikimapia Iteractive</a>
             </li>
-            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.RuCadastreIdentify", "title":"RuCadastre Identify"}'>
-                <a class="clearfix"  href="#" >RuCadastre Identify</a>
+            <li data-geomanager-type="interactivelayers" data-geomanager-options='{"providername":"L.GeoManager.RUCadastreIdentify", "title":"RUCadastre Identify"}'>
+                <a class="clearfix"  href="#" >RUCadastre Identify</a>
             </li>
 
 
@@ -322,7 +322,11 @@ pre.prettyprint {
             </li> -->
 
             <li data-geomanager-type="overlays" data-geomanager-options='{"providername":"L.GeoManager.ArcGIS_EPSG900913_Overlay", "title":"RuCadastre Overlay", "url":"http://maps.rosreestr.ru/arcgis/rest/services/Cadastre/Cadastre/MapServer"}'>
-                <a class="clearfix"  href="#" >RuCadastre Overlay</a>
+                <a class="clearfix"  href="#" >RUCadastre Overlay</a>
+            </li>
+
+            <li data-geomanager-type="overlays" data-geomanager-options='{"providername":"L.GeoManager.UACadastre", "title":"UACadastre Overlay"}'>
+                <a class="clearfix"  href="#" >UACadastre Overlay</a>
             </li>
 
             <li data-geomanager-type="overlays" data-geomanager-options='{"providername":"L.GeoManager.WikimapiaOverlay", "title":"Wikimapia Overlay"}'>
@@ -486,7 +490,8 @@ pre.prettyprint {
                     <option value="L.GeoManager.MapQuestGeocode">MapQuest</option>
                     <option value="L.GeoManager.NokiaGeocode">Nokia</option>
                     <option value="L.GeoManager.YandexGeocode">Yandex</option>
-                    <option value="L.GeoManager.RuCadastreGeocode">RuCadastre (parcel numbers)</option>
+                    <option value="L.GeoManager.RUCadastreGeocode">RUCadastre (parcel numbers)</option>
+                    <option value="L.GeoManager.UACadastreGeocode">UACadastre (parcel numbers)</option>
                   </select>
                 </div>
 
@@ -557,7 +562,8 @@ pre.prettyprint {
               <li>MapQuest</li>
               <li>Nokia</li>
               <li>Yandex</li>
-              <li>RuCadastre (parcel numbers)</li>
+              <li>RUCadastre (parcel numbers)</li>
+              <li>UACadastre (parcel numbers)</li>
             </ul>
 
           </section>
@@ -767,7 +773,7 @@ pre.prettyprint {
     <!-- Placed at the end of the document so the pages load faster -->
 
     <!-- GEO Ip Locator Script -->
-    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script>
+    <!--<script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script> -->
 
 
     <!-- Date.format -->
@@ -820,6 +826,9 @@ pre.prettyprint {
     -->
     <script src="components/leaflet/leaflet-src.js"></script>
 
+    <script src="components/leaflet.proj4/proj4-compressed.js"></script>
+    <script src="components/leaflet.proj4/proj4leaflet.js"></script>
+
     <script src="components/leaflet.label/leaflet.label-src.js"></script>
 
     <script src="components/leaflet.geomanager/layers/wikimapia.js"></script>
@@ -832,7 +841,7 @@ pre.prettyprint {
     <script src="components/leaflet.geomanager/leaflet.geomanager.js"></script>
     <script src="components/leaflet.geomanager/providers/common.js"></script>
     <script src="components/leaflet.geomanager/providers/rucadastre.js"></script>
-
+    <script src="components/leaflet.geomanager/providers/uacadastre.js"></script>
 
 
     <!-- Google prettify -->
@@ -864,8 +873,8 @@ pre.prettyprint {
         }
       });
 
-      //var map = L.map('map').setView([55.751666676667,37.617777787778], 13);
-      var map = L.map('map').setView([geoip_latitude(),  geoip_longitude()], 13);
+      var map = L.map('map').setView([37.783333,-122.416667], 13);
+      //var map = L.map('map').setView([geoip_latitude(),  geoip_longitude()], 13);
 
       L.control.scale().addTo(map);
 

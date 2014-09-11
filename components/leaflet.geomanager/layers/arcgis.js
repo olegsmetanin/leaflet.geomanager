@@ -1,5 +1,5 @@
 /*
- * L.RuCadastre
+ * L.RUCadastre
  */
 
 L.ArcGIS_EPSG900913 = L.Class.extend({
