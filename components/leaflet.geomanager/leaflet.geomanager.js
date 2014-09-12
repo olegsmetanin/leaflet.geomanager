@@ -84,6 +84,8 @@ L.GeoManager = L.Class.extend({
             , geomanager_options = geomanager_options_attr ? JSON.parse(geomanager_options_attr) : {}
             , provider = that._getFunctionByName(geomanager_options.providername);
 
+        geomanager_options.map = that._map;
+
         layerPromise = provider(geomanager_options);
 
         $.when(layerPromise).done(function (layer) {
