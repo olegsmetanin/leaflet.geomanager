@@ -80,10 +80,10 @@ L.GeoManager.UACadastreIdentify = function (options) {
                     var res2 = data2.data[0];
 
                     var content = ''
-                      + 'Кадастровый номер: ' + res2.cadnum + '<br/>' 
-                      + 'Использование: ' +  res2.use + '<br/>' 
-                      + 'Площадь: ' + res2.area + ' ' + res2.unit_area + '<br/>' 
-                      + 'Целевое назначение: ' + res2.purpose;
+                      + '<b>Кадастровый номер:</b> ' + res2.cadnum + '<br/>' 
+                      + '<b>Использование:</b> ' +  res2.use + '<br/>' 
+                      + '<b>Площадь:</b> ' + res2.area + ' ' + res2.unit_area + '<br/>' 
+                      + '<b>Целевое назначение:</b> ' + res2.purpose;
      
                     dfdid.resolve({
                         content : content
@@ -167,10 +167,10 @@ L.GeoManager.UACadastreGeocode = function (options) {
                     var res2 = data2.data[0];
 
                     var content = ''
-                      + 'Кадастровый номер: ' + res2.cadnum + '<br/>' 
-                      + 'Использование: ' +  res2.use + '<br/>' 
-                      + 'Площадь: ' + res2.area + ' ' + res2.unit_area + '<br/>' 
-                      + 'Целевое назначение: ' + res2.purpose;
+                      + '<b>Кадастровый номер:</b> ' + res2.cadnum + '<br/>' 
+                      + '<b>Использование:</b> ' +  res2.use + '<br/>' 
+                      + '<b>Площадь:</b> ' + res2.area + ' ' + res2.unit_area + '<br/>' 
+                      + '<b>Целевое назначение:</b> ' + res2.purpose;
  
                     dfd.resolve({
                         content : content 
