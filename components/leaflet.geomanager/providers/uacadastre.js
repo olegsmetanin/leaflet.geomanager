@@ -46,7 +46,7 @@ L.GeoManager.UACadastreIdentify = function (options) {
         .done(function(data){
             if (data) {
                 var $xml = $(data)
-                    , original_coords = $xml.find('gml\\:coordinates').text().split(' ')
+                    , original_coords = $xml.find('gml\\:coordinates, coordinates').text().split(' ')
                     , koatuu = $xml.find('dzk\\:koatuu').text()       
                     , zone = $xml.find('dzk\\:zona').text()  
                     , quartal = $xml.find('dzk\\:kvartal').text() 
