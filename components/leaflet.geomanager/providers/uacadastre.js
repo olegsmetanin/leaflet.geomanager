@@ -47,21 +47,41 @@ L.GeoManager.UACadastreIdentify = function (options) {
             if (data) {
                 var $xml = $(data)
                     , original_coords = $xml.find('gml\\:coordinates, coordinates').text().split(' ')
-                    , koatuu = $xml.find('dzk\\:koatuu').text()       
-                    , zone = $xml.find('dzk\\:zona').text()  
-                    , quartal = $xml.find('dzk\\:kvartal').text() 
-                    , parcel = $xml.find('dzk\\:parcel').text()   
-                    , coords = [];
+                    , koatuu = $xml.find('dzk\\:koatuu, koatuu').text()       
+                    , zone = $xml.find('dzk\\:zona, zona').text()  
+                    , quartal = $xml.find('dzk\\:kvartal, kvartal').text() 
+                    , parcel = $xml.find('dzk\\:parcel, parcel').text()   
+                    , coords = []
+					, coords2 = [];
 
+var thisArrNum2 = false;
                 for (var i = 0; i < original_coords.length; i++) {
 
+		
+		if(original_coords[i].indexOf(',')==original_coords[i].lastIndexOf(',')){
                     var coord = original_coords[i].split(',')
                         , unprjected_coord = unproject(coord[0], coord[1]);
-
+                    if(thisArrNum2){coords2.push(unprjected_coord);}else{coords.push(unprjected_coord);}	
+}
+		else{
+		
+		thisArrNum2 = true;
+		var coord = original_coords[i].substr(0, original_coords[i].length/2).split(',')
+                        , unprjected_coord = unproject(coord[0], coord[1]);
                     coords.push(unprjected_coord);
+		var coord = original_coords[i].substr(original_coords[i].length/2 + 1, original_coords[i].length).split(',')
+                        , unprjected_coord = unproject(coord[0], coord[1]);
+                    coords2.push(unprjected_coord);
+		}
                 }
                     
-                var poly = new L.Polygon(coords);   
+				var allCoords = [coords,coords2]
+					
+                if(thisArrNum2) { 
+					var poly = new L.Polygon(allCoords);   
+				} else {
+					var poly = new L.Polygon(coords);
+				}
 
 
                 $.ajax({       
@@ -95,6 +115,7 @@ L.GeoManager.UACadastreIdentify = function (options) {
                 });
             }
         });
+
 
         return dfdid.promise();
     }
