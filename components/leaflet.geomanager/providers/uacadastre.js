@@ -43,74 +43,70 @@ L.GeoManager.UACadastreIdentify = function (options) {
                 , 'Y': xy.y
             }
         })
-        .done(function(data){
+        .done(function (data) {
             if (data) {
                 var $xml = $(data)
                     , original_coords = $xml.find('gml\\:coordinates, coordinates').text().split(' ')
-                    , koatuu = $xml.find('dzk\\:koatuu, koatuu').text()       
-                    , zone = $xml.find('dzk\\:zona, zona').text()  
-                    , quartal = $xml.find('dzk\\:kvartal, kvartal').text() 
-                    , parcel = $xml.find('dzk\\:parcel, parcel').text()   
+		, outer_coords = $xml.find('gml\\:outerBoundaryIs, outerBoundaryIs').find('gml\\:coordinates, coordinates').text().split(' ')
+		, inner_coords = $xml.find('gml\\:innerBoundaryIs, innerBoundaryIs').find('gml\\:coordinates, coordinates')
+                    , koatuu = $xml.find('dzk\\:koatuu, koatuu').text()
+                    , zone = $xml.find('dzk\\:zona, zona').text()
+                    , quartal = $xml.find('dzk\\:kvartal, kvartal').text()
+                    , parcel = $xml.find('dzk\\:parcel, parcel').text()
                     , coords = []
 					, coords2 = [];
-
-var thisArrNum2 = false;
-                for (var i = 0; i < original_coords.length; i++) {
-
-		
-		if(original_coords[i].indexOf(',')==original_coords[i].lastIndexOf(',')){
-                    var coord = original_coords[i].split(',')
-                        , unprjected_coord = unproject(coord[0], coord[1]);
-                    if(thisArrNum2){coords2.push(unprjected_coord);}else{coords.push(unprjected_coord);}	
-}
-		else{
-		
-		thisArrNum2 = true;
-		var coord = original_coords[i].substr(0, original_coords[i].length/2).split(',')
+                for (var i = 0; i < outer_coords.length; i++) {
+                    var coord = outer_coords[i].split(',')
                         , unprjected_coord = unproject(coord[0], coord[1]);
                     coords.push(unprjected_coord);
-		var coord = original_coords[i].substr(original_coords[i].length/2 + 1, original_coords[i].length).split(',')
-                        , unprjected_coord = unproject(coord[0], coord[1]);
-                    coords2.push(unprjected_coord);
-		}
                 }
-                    
-				var allCoords = [coords,coords2]
-					
-                if(thisArrNum2) { 
-					var poly = new L.Polygon(allCoords);   
-				} else {
-					var poly = new L.Polygon(coords);
-				}
+                if (inner_coords.text().split(' ').length > 1) {
+                    inner_coords.each(function () {
+                        var newInnerPolygon = $(this).text().split(' ');
+                        var newCoordsArray = [];
 
+                        for (var i = 0; i < newInnerPolygon.length; i++) {
+                            var coord = newInnerPolygon[i].split(',')
+                        , unprjected_coord = unproject(coord[0], coord[1]);
+                            newCoordsArray.push(unprjected_coord);
+                        }
+                        coords2.push(newCoordsArray);
+                    })
+                }
+                if (coords2.length > 0) {
+                    coords2.push(coords);
+                    var poly = new L.Polygon(coords2);
+                } else {
+                    var poly = new L.Polygon(coords);
+                }
 
-                $.ajax({       
-                    url : 'http://212.26.144.110/kadastrova-karta/get-parcel-Info'
+                $.ajax({
+                    url: 'http://212.26.144.110/kadastrova-karta/get-parcel-Info'
                     , type: 'GET'
-                    , dataType : 'json'
-                    , data : {
-                        'koatuu' : koatuu,
-                        'zone':zone,
-                        'quartal':quartal,
-                        'parcel':parcel
+                    , dataType: 'json'
+                    , data: {
+                        'koatuu': koatuu,
+                        'zone': zone,
+                        'quartal': quartal,
+                        'parcel': parcel
                     }
                 })
-                .done(function(data2){
-                  if (data2.data && data2.data.length>0) {
-                    var res2 = data2.data[0];
+                .done(function (data2) {
+                    if (data2.data && data2.data.length > 0) {
+                        var res2 = data2.data[0];
 
-                    var content = ''
-                      + '<b>Кадастровый номер:</b> ' + res2.cadnum + '<br/>' 
-                      + '<b>Использование:</b> ' +  res2.use + '<br/>' 
-                      + '<b>Площадь:</b> ' + res2.area + ' ' + res2.unit_area + '<br/>' 
+                        var content = ''
+                      + '<b>Кадастровый номер:</b> ' + res2.cadnum + '<br/>'
+                      + '<b>Использование:</b> ' + res2.use + '<br/>'
+                      + '<b>Площадь:</b> ' + res2.area + ' ' + res2.unit_area + '<br/>'
                       + '<b>Целевое назначение:</b> ' + res2.purpose;
-     
-                    dfdid.resolve({
-                        content : content
-                        , latlng : latlng
-                        , layer: poly 
-                    });
-                  }
+
+                        dfdid.resolve({
+                            content: content
+                        , latlng: latlng
+                        , layer: poly
+                        });
+                    }
 
                 });
             }
