@@ -155,12 +155,11 @@ L.GeoManager.UACadastreGeocode = function (options) {
     $.ajax(ajaxopt)
     .done(function(data){
         if (data.data && data.data.length>0) {
-            var epsg900913 = '+proj=merc+a=6378137+b=6378137+lat_ts=0.0+lon_0=0.0+x_0=0.0+y_0=0+k=1.0+units=m+nadgrids=@null+wktext+over+no_defs';
             var res=data.data[0]
-                , epsg4284  = '+proj=longlat+ellps=kras+towgs84=23.92,-141.27,-80.9,-0,0.35,0.82,-0.12+no_defs'
+                , epsg900913 = '+proj=merc+a=6378137+b=6378137+lat_ts=0.0+lon_0=0.0+x_0=0.0+y_0=0+k=1.0+units=m+nadgrids=@null+wktext+over+no_defs'
                 , epsg4326 = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
-                , point1 = proj4(epsg4284, epsg4326, [res.st_xmin,res.st_ymin])
-                , point2 = proj4(epsg4284, epsg4326, [res.st_xmax,res.st_ymax])
+                , point1 = proj4(epsg900913, epsg4326, [res.st_xmin,res.st_ymin])
+                , point2 = proj4(epsg900913, epsg4326, [res.st_xmax,res.st_ymax])
                 , bounds = new L.LatLngBounds([point1[1],point1[0]], [point2[1],point2[0]])
                 , cadnumparts = cadnum.split(':') 
                 , koatuu = cadnumparts[0]
